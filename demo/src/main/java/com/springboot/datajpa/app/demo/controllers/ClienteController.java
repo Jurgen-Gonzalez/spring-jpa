@@ -4,26 +4,24 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import com.springboot.datajpa.app.demo.models.dao.IClienteDao;
 import com.springboot.datajpa.app.demo.models.entity.Cliente;
+import com.springboot.datajpa.app.demo.models.service.IClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
 public class ClienteController {
 
     @Autowired
-    @Qualifier("clienteDao")
-    private IClienteDao clienteDao;
+    private IClienteService clienteDao;
 
     @RequestMapping(value="/listar", method=RequestMethod.GET)
     public String listar(Model model){
