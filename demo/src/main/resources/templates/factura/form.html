@@ -43,7 +43,13 @@
                 type="text"
                 th:field="*{descripcion} "
                 class="form-control"
+                th:errorclass="'form-control is-invalid'"
               />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('descripcion')}"
+                th:errors="*{descripcion}"
+              ></div>
             </div>
             <div class="form-group row">
               <label
@@ -80,7 +86,9 @@
               <tbody></tbody>
             </table>
 
-            <h5 >Total <span class="badge badge-secondary" id="gran_total">0</span></h5>
+            <h5>
+              Total <span class="badge badge-secondary" id="gran_total">0</span>
+            </h5>
 
             <div class="form-group row">
               <input
