@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ClienteController {
@@ -88,4 +89,17 @@ public class ClienteController {
         return "redirect:/listar";
     }
 
+    @RequestMapping(value = "/ver/{id}")
+    public String ver(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) { 
+        Cliente cliente = clienteDao.findOne(id);
+
+        if(cliente == null){
+            flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
+            return "redirect:/listar";
+        }
+
+        model.put("cliente", cliente);
+        model.put("titulo", "Detalle cliente: " + cliente.getNombre());
+        return "ver";
+    }
 }
