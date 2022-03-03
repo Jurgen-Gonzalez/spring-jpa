@@ -2,6 +2,11 @@
 <html lang="en">
   <body>
     <script type="text/javascript" th:fragment="javascript">
+      if(typeof jQuery == 'undefined'){
+        alert('No jquery');
+      } else {
+        alert('Yes jquery');
+      }
       $(document).ready(function () {
         $("#buscar_producto").autocomplete({
           source: function (request, response) {
