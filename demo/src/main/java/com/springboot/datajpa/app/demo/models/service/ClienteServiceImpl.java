@@ -3,8 +3,10 @@ package com.springboot.datajpa.app.demo.models.service;
 import java.util.List;
 
 import com.springboot.datajpa.app.demo.models.dao.IClienteDao;
+import com.springboot.datajpa.app.demo.models.dao.IFacturaDao;
 import com.springboot.datajpa.app.demo.models.dao.IProductoDao;
 import com.springboot.datajpa.app.demo.models.entity.Cliente;
+import com.springboot.datajpa.app.demo.models.entity.Factura;
 import com.springboot.datajpa.app.demo.models.entity.Producto;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ClienteServiceImpl implements IClienteService{
 
     @Autowired
     private IClienteDao clienteDao;
+
+    @Autowired
+    private IFacturaDao facturaDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -57,6 +62,18 @@ public class ClienteServiceImpl implements IClienteService{
     @Transactional(readOnly = true)
     public List<Producto> findByNombre(String term) {
         return productoDao.findByNombreLikeIgnoreCase("%"+term+"%");
+    }
+
+    @Transactional
+    @Override
+    public void saveFactura(Factura factura) {
+    facturaDao.save(factura);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Producto findProductoById(Long id) {
+        return productoDao.findById(id).orElse(null);
     }
     
 }

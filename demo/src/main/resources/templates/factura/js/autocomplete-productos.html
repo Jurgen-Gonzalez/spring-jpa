@@ -27,7 +27,7 @@
           select: function (event, ui) {
             // $("#buscar_producto").val(ui.item.label);
 
-            if(itemsHelper.hasProducto(ui.item.value)){
+            if (itemsHelper.hasProducto(ui.item.value)) {
               itemsHelper.incrementaCantidad(ui.item.value, ui.item.precio);
               return false;
             }
@@ -42,6 +42,11 @@
             itemsHelper.calcularImporte(ui.item.value, ui.item.precio, 1);
             return false;
           },
+        });
+
+        $("form").submit(function () {
+          $("#plantillaItemsFactura").remove();
+          return;
         });
       });
 
@@ -67,20 +72,19 @@
           $("#cantidad_" + id).val(++cantidad);
           this.calcularImporte(id, precio, cantidad);
         },
-        eliminarLineaFactura: function(id){
-          $("#row_"+id).remove();
+        eliminarLineaFactura: function (id) {
+          $("#row_" + id).remove();
           this.calcularGranTotal();
         },
-        calcularGranTotal: function(){
+        calcularGranTotal: function () {
           var total = 0;
 
-          $('span[id^="total_importe_"]').each(function(){
+          $('span[id^="total_importe_"]').each(function () {
             total += parseInt($(this).html());
-          })
+          });
 
-          $('#gran_total').html(total);
-        }
-
+          $("#gran_total").html(total);
+        },
       };
     </script>
   </body>
