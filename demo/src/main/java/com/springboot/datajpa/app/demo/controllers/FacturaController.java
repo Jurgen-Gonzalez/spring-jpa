@@ -60,7 +60,7 @@ public class FacturaController {
             RedirectAttributes flash) {
         Cliente cliente = clienteService.findOne(clienteId);
         if (cliente == null) {
-            flash.addAttribute("error", "El cliente no existe en la base de datos");
+            flash.addFlashAttribute("error", "El cliente no existe en la base de datos");
             return "redirect:/listar";
         }
 
@@ -115,7 +115,7 @@ public class FacturaController {
         clienteService.saveFactura(factura);
         status.setComplete();
 
-        flash.addAttribute("success", "Factura creada con exito!");
+        flash.addFlashAttribute("success", "Factura creada con exito!");
         return "redirect:/ver/" + factura.getCliente().getId();
     }
 
@@ -125,11 +125,11 @@ public class FacturaController {
 
         if(factura != null){
             clienteService.deleteFactura(id);
-            flash.addAttribute("success", "Factura eliminada con exito");
+            flash.addFlashAttribute("success", "Factura eliminada con exito");
             return "redirect:/ver/" + factura.getCliente().getId();
         }
 
-        flash.addAttribute("error", "La factura no existe en la base de datos, no se pudo eliminar");
+        flash.addFlashAttribute("error", "La factura no existe en la base de datos, no se pudo eliminar");
 
         return "redirect:/listar";
     }
